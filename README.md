@@ -22,7 +22,8 @@ A Java-based **Student Record Management System** developed using **Java, JDBC, 
 - Eclipse IDE
 ---
 ##  Project Structure
-'''
+
+```
 StudentRecordSystem
 │
 ├── src
@@ -39,7 +40,7 @@ StudentRecordSystem
 │          └── Student.java
 │
 └── README.md
-'''
+```
 ---
 
 ##  Database
