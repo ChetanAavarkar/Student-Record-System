@@ -60,9 +60,13 @@ public class StudentRecordSystem {
 					// Add student to the database using DAO
 					boolean added = studentDAO.addStudent(student);
 					if (added) {
-						System.out.println("Student added successfully to database.");
+						System.out.println("====================================");
+						System.out.println("Student added successfully!");
+						System.out.println("====================================");
 					} else {
+						System.out.println("====================================");
 						System.out.println("Failed to add student.");
+						System.out.println("====================================");
 					}
 					break;
 				
@@ -76,14 +80,19 @@ public class StudentRecordSystem {
 					Student foundStudent = studentDAO.searchStudent(idToSearch);
 					
 					if (foundStudent != null) {
+						System.out.println("====================================");
 						System.out.println("Student Found:");
 						System.out.println("ID : " + foundStudent.getId());
 						System.out.println("Name : " + foundStudent.getName());
 						System.out.println("City : " + foundStudent.getCity());
+						System.out.println("====================================");
 					} else {
+						System.out.println("====================================");
 						System.out.println("Student not found.");
+						System.out.println("====================================");
 					}
 					break;
+					
 				// Case 3: Remove a student by ID	
 				case 3:
 					System.out.print("Enter studnet ID to remove: ");
@@ -93,9 +102,13 @@ public class StudentRecordSystem {
 					// Delete student using DAO
 					boolean deleted = studentDAO.deleteStudent(idToRemove);
 					if (deleted) {
+						System.out.println("====================================");
 						System.out.println("Student removed successfully.");
+						System.out.println("====================================");
 					} else {
+						System.out.println("====================================");
 						System.out.println("Student not found");
+						System.out.println("====================================");
 					}
 					break;
 					
@@ -117,9 +130,13 @@ public class StudentRecordSystem {
 					// Update student in the database
 					boolean updated = studentDAO.updateStudent(updatedStudent);
 					if (updated) {
+						System.out.println("====================================");
 						System.out.println("Student updated successfully.");
+						System.out.println("====================================");
 					} else {
+						System.out.println("====================================");
 						System.out.println("Student not found or update failed.");
+						System.out.println("====================================");
 					}
 					break;
 				
@@ -129,19 +146,29 @@ public class StudentRecordSystem {
 					List<Student> students = studentDAO.getAllStudents();
 					
 					if (students.isEmpty()) {
+						 System.out.println("====================================");
 						System.out.println("No students available.");
+						 System.out.println("====================================");
 					} else {
-						System.out.println("\n--- Student List ---");
+						System.out.println("-----------------------------------------");
+						System.out.printf("%-8s %-16s %-12s%n", "ID", "Name", "City");
+						System.out.println("-----------------------------------------");
 						// Iterate through the list and display each student
 						for (Student s : students) {
-							System.out.println("ID: " + s.getId() + ", Name: " + s.getName() + ", City: " + s.getCity());
+							System.out.printf("%-8d %-16s %-12s%n",
+									s.getId(),
+									s.getName(),
+									s.getCity());
 						}
+						System.out.println("-----------------------------------------");
 					}
 					break;
 				
 				// Case 6: Exit the application
 				case 6:
+					System.out.println("====================================");
 					System.out.println("Exiting program...");
+					System.out.println("====================================");
 					sc.close(); // Close the Scanner
 					return;  // Exit the main method
 					
