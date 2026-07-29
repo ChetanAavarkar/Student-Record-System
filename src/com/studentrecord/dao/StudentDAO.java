@@ -29,7 +29,13 @@ public class StudentDAO {
      * @return true if student is added successfully
      */
 	public boolean addStudent(Student student) {
+		// 1. Check if ID already exists
+		if (studentExists(student.getId())) {
+			System.out.println("Student ID already exists.");
+			return false;
+		}
 		
+		//2. If not exists, perform insert
 		String sql = "INSERT INTO student (id, name, city) VALUES (?, ?, ?)";
 		
 		try (Connection con = DBConnection.getConnection();
@@ -46,7 +52,6 @@ public class StudentDAO {
 		} catch (SQLException e) {
 			e.printStackTrace();
 			return false;
-		}
 	}
 	
 	/**
@@ -143,5 +148,29 @@ public class StudentDAO {
 			e.printStackTrace();
 			return false;
 		}	 
+	}
+	/**
+	 * Checks if a student with given ID already exists.
+	 * @param id Student ID
+	 * @return true if student exists, false otherwise
+	 */
+	public boolean studentExists(int id) {
+		String sql = "SELECT id FROM student WHERE id = ?";
+		
+		try (Connection con = DBConnection.getConnection();
+			 PreparedStatement ps = con.prepareStatement(sql)) {
+			
+			ps.setInt(1, id);
+			
+			try (ResultSet rs = ps.executeQuery()) {
+				// If rs.next() is true, at least one record exists
+				return rs.next();
+			}
+			
+		} catch (SQLException e) {
+			e.printStackTrace();
+			//Here, we return false (assuming not exists).
+			return false;
+		}
 	}
 }
