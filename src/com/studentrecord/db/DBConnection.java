@@ -27,6 +27,10 @@ public class DBConnection {
 	 * @throws SQLException if connection fails
 	 */
 	public static Connection getConnection() throws SQLException {
-		return DriverManager.getConnection(URL, USER, PASSWORD);
+		try {
+			return DriverManager.getConnection(URL, USER, PASSWORD);
+		} catch (SQLException e) {
+			throw new SQLException("Database connection failed. Please check MySQL server.", e);
+		}
 	}
 }
