@@ -29,9 +29,11 @@ public class StudentDAO {
      * @return true if student is added successfully
      */
 	public boolean addStudent(Student student) {
+		
 		// 1. Check if ID already exists
 		if (studentExists(student.getId())) {
 			System.out.println("Student ID already exists.");
+			System.out.println("Please enter another ID.");
 			return false;
 		}
 		
@@ -50,8 +52,10 @@ public class StudentDAO {
 			return rows > 0;
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Failed to add student.");
+			System.out.println("Please check database connection or input data.");
 			return false;
+		}
 	}
 	
 	/**
@@ -72,12 +76,13 @@ public class StudentDAO {
 					Student student = new Student();
 					student.setId(rs.getInt("id"));
 					student.setName(rs.getString("name"));
-					student.setCity(rs.getString("City"));
+					student.setCity(rs.getString("city"));
 					return student;
 				}
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Failed to search student.");
+			System.out.println("Please check database connection.");
 		}
 		return null;
 	}
@@ -102,7 +107,8 @@ public class StudentDAO {
 				students.add(student);
 			}
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Failed to fetch student records.");
+			System.out.println("Please check database connection.");
 		}
 		return students;
 	}
@@ -122,7 +128,8 @@ public class StudentDAO {
 			int rows = ps.executeUpdate();
 			return rows > 0;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Failed to delete student.");
+			System.out.println("Please check database connection.");
 			return false;
 		}
 	}
@@ -145,10 +152,12 @@ public class StudentDAO {
 			 int rows = ps.executeUpdate();
 			return rows > 0;
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Failed to update student.");
+			System.out.println("Please check database connection or entered data.");
 			return false;
 		}	 
 	}
+	
 	/**
 	 * Checks if a student with given ID already exists.
 	 * @param id Student ID
@@ -168,7 +177,8 @@ public class StudentDAO {
 			}
 			
 		} catch (SQLException e) {
-			e.printStackTrace();
+			System.out.println("Could not check student existence.");
+			System.out.println("Please check database connection.");
 			//Here, we return false (assuming not exists).
 			return false;
 		}
